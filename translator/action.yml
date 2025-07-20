@@ -1,0 +1,19 @@
+name: 'My Open Source GitHub Action'
+description: 'Greets a user and outputs the current time.'
+author: 'Jamie Clark'
+inputs:
+  from:
+    description: 'URI to the source JSON language file (e.g., en.json)'
+    required: true
+  to:
+    description: 'Target language code (2-letter ISO, e.g. fr)'
+    required: true
+outputs:
+  translated:
+    description: 'Translated JSON as a single-line string'
+runs:
+  using: 'node20'
+  main: 'src/index.js'
+branding:
+  icon: 'book-open'
+  color: 'green'

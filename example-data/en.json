@@ -1,0 +1,55 @@
+{
+  "app": {
+    "title": "Translator App",
+    "description": "Translate text between languages",
+    "menu": {
+      "home": "Home",
+      "about": "About",
+      "contact": "Contact",
+      "settings": {
+        "title": "Settings",
+        "language": "Language",
+        "theme": {
+          "light": "Light Mode",
+          "dark": "Dark Mode"
+        }
+      }
+    }
+  },
+  "auth": {
+    "login": "Login",
+    "logout": "Logout",
+    "username": "Username",
+    "password": "Password",
+    "errors": {
+      "invalidCredentials": "Invalid username or password",
+      "requiredField": "This field is required",
+      "accountLocked": "Your account has been locked"
+    }
+  },
+  "translation": {
+    "inputPlaceholder": "Enter text to translate",
+    "sourceLanguage": "Source Language",
+    "targetLanguage": "Target Language",
+    "button": "Translate",
+    "result": {
+      "title": "Translation Result",
+      "copy": "Copy",
+      "copied": "Copied to clipboard"
+    }
+  },
+  "notifications": {
+    "success": {
+      "translationComplete": "Translation completed successfully"
+    },
+    "error": {
+      "network": "Network error occurred",
+      "unsupportedLanguage": "Unsupported language selected"
+    }
+  },
+  "footer": {
+    "rights": "All rights reserved.",
+    "terms": "Terms of Service",
+    "privacy": "Privacy Policy"
+  }
+}
