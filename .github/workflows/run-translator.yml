@@ -29,17 +29,37 @@ jobs:
         run: |
           echo "source_json=$(base64 -w 0 example-data/en.json)" >> $GITHUB_OUTPUT
 
-      - name: Run Translator
-        id: run_translator
-        uses: HamieScripts/translator@main
+      # - name: Run Translator
+      #   id: run_translator
+      #   uses: HamieScripts/translator@main
+      #   with:
+      #     source-json: ${{ steps.read_source.outputs.source_json }}
+      #     from: en
+      #     to: fr
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v4
         with:
-          source-json: ${{ steps.read_source.outputs.source_json }}
-          from: en
-          to: fr
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: us-east-1
+
+      - name: Run AWS Translate with inline JSON
+        id: translate
+        run: |
+          JSON_INPUT='{
+            "Text": "Hello, how are you?",
+            "SourceLanguageCode": "en",
+            "TargetLanguageCode": "es"
+          }'
+
+          echo "Translating..."
+          aws translate translate-text \
+            --cli-input-json ${{ steps.read_source.outputs.source_json }} \
+            --output json | jq -r '.TranslatedText'
 
       - name: Write translated JSON to file
         run: |
-          echo '${{ steps.run_translator.outputs.translated }}' > example-data/fr.json
+          echo '${{ steps.translate.outputs.TranslatedText }}' > example-data/fr.json
 
       - name: Commit and push translated file
         run: |
