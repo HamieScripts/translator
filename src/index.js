@@ -2,16 +2,17 @@ const core = require('@actions/core');
 
 
 
-function dummyTranslateJson(obj, toLang) {
-  if (typeof obj === 'string') {
-    return `[${toLang}] ${obj}`;
-  } else if (typeof obj === 'object' && obj !== null) {
-    const result = Array.isArray(obj) ? [] : {};
-    for (const key in obj) {
-      result[key] = dummyTranslateJson(obj[key], toLang);
-    }
-    return result;
-  }
+function translate(obj, toLang) {
+  const obj = {};
+  // if (typeof obj === 'string') {
+  //   return `[${toLang}] ${obj}`;
+  // } else if (typeof obj === 'object' && obj !== null) {
+  //   const result = Array.isArray(obj) ? [] : {};
+  //   for (const key in obj) {
+  //     result[key] = dummyTranslateJson(obj[key], toLang);
+  //   }
+  //   return result;
+  // }
   return obj;
 }
 
@@ -32,7 +33,7 @@ async function run() {
 
     const sourceJson = JSON.parse(sourceJsonStr);
 
-    const translatedJson = dummyTranslateJson(sourceJson, to);
+    const translatedJson = translate(sourceJson, to);
     const output = JSON.stringify(translatedJson, null, 2);
 
     core.setOutput('translated', output);
