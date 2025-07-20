@@ -3,7 +3,7 @@ const core = require('@actions/core');
 
 
 function translate(obj, toLang) {
-  const obj = {};
+  const output = {};
   // if (typeof obj === 'string') {
   //   return `[${toLang}] ${obj}`;
   // } else if (typeof obj === 'object' && obj !== null) {
@@ -13,7 +13,7 @@ function translate(obj, toLang) {
   //   }
   //   return result;
   // }
-  return obj;
+  return output;
 }
 
 async function run() {
