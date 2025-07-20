@@ -36,6 +36,7 @@ async function run() {
     const output = JSON.stringify(translatedJson);
 
     core.setOutput('translated', output);
+    console.log(output)
   } catch (error) {
     core.setFailed(error.message);
   }
