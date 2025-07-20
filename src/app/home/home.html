@@ -1,4 +1,9 @@
-<div class="jumbotron glass-card p-6 rounded-lg shadow-lg bg-white/10 backdrop-blur-md border border-white/20 mx-auto mt-4 max-w-screen-lg text-center">
+<div class="jumbotron glass-card p-6 rounded-lg shadow-lg bg-white/10 backdrop-blur-md border border-white/20 mx-auto mt-4 max-w-screen-lg text-center flex flex-col justify-center items-center min-h-[70vh]">
   <h2 class="text-3xl font-bold mb-4">{{'SELECT_LANGUAGE' | translate}}</h2>
-  <p-select [options]="languages" [(ngModel)]="selectedLanguage" optionLabel="name" placeholder="{{'SELECT_LANGUAGE' | translate}}..."></p-select>
+  <p-select [options]="languages" [(ngModel)]="selectedLanguage" optionLabel="name" (onChange)="onLanguageChange()" class="w-1/2"></p-select>
+</div>
+
+<div class="getting-started-section glass-card p-6 rounded-lg shadow-lg bg-white/10 backdrop-blur-md border border-white/20 mx-auto mt-4 max-w-screen-lg text-center">
+  <h2 class="text-3xl font-bold mb-4">{{'GETTING_STARTED_TITLE' | translate}}</h2>
+  <p>{{'GETTING_STARTED_TEXT' | translate}}</p>
 </div>
