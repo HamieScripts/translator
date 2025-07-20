@@ -26,7 +26,7 @@ async function run() {
       throw new Error('Invalid language code. Use 2-letter ISO codes only.');
     }
 
-    const fromFilePath = path.join(folder, `${from}.json`);
+    const fromFilePath = path.join(process.cwd(), folder, `${from}.json`);
     core.info(`Reading source JSON: ${fromFilePath}`);
 
     if (!fs.existsSync(fromFilePath)) {
