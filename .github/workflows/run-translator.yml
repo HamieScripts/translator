@@ -73,7 +73,7 @@ jobs:
         id: translate
         run: |
           # Decode source JSON into a file
-          echo "${{ steps.read_source.outputs.source_json }}"
+          echo "${{ steps.read_source.outputs.source_json }}" | base64 -d
 
 
       - name: Write translated JSON to file
