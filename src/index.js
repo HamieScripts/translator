@@ -33,7 +33,7 @@ async function run() {
     const sourceJson = JSON.parse(sourceJsonStr);
 
     const translatedJson = dummyTranslateJson(sourceJson, to);
-    const output = JSON.stringify(translatedJson);
+    const output = JSON.stringify(translatedJson, null, 2);
 
     core.setOutput('translated', output);
     console.log(output)
