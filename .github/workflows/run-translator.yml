@@ -3,12 +3,16 @@ name: Run Translator Manually
 on:
   workflow_dispatch:
     inputs:
-      from:
-        description: 'URI to source en.json'
+      folder:
+        description: 'URI to folder containing translations'
         required: true
-        default: './example-data/en.json'
+        default: './example-data'
+      from:
+        description: 'Source language code (2-letter ISO, e.g. en)'
+        required: true
+        default: 'en'
       to:
-        description: 'Target language code'
+        description: 'Target language code (2-letter ISO, e.g. fr)'
         required: true
         default: 'fr'
 
@@ -19,5 +23,6 @@ jobs:
       - name: Run Translator
         uses: HamieScripts/translator@main
         with:
-          from: \${{ github.event.inputs.from }}
-          to: \${{ github.event.inputs.to }}
+          folder: ${{ github.event.inputs.folder }}
+          from: ${{ github.event.inputs.from }}
+          to: ${{ github.event.inputs.to }}

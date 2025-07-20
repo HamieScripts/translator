@@ -1,19 +1,26 @@
 name: 'My Open Source GitHub Action'
-description: 'Greets a user and outputs the current time.'
+description: 'Translates JSON language files from one language to another.'
 author: 'Jamie Clark'
+
 inputs:
+  folder:
+    description: 'URI to the folder containing translation JSON files'
+    required: true
   from:
-    description: 'URI to the source JSON language file (e.g., en.json)'
+    description: 'Source language code (2-letter ISO, e.g. en)'
     required: true
   to:
     description: 'Target language code (2-letter ISO, e.g. fr)'
     required: true
+
 outputs:
   translated:
     description: 'Translated JSON as a single-line string'
+
 runs:
   using: 'node20'
   main: 'src/index.js'
+
 branding:
   icon: 'book-open'
   color: 'green'

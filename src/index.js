@@ -1,22 +1,6 @@
 const core = require('@actions/core');
-const https = require('https');
-
-function fetchJson(uri) {
-  return new Promise((resolve, reject) => {
-    https.get(uri, res => {
-      let data = '';
-      res.on('data', chunk => data += chunk);
-      res.on('end', () => {
-        try {
-          const json = JSON.parse(data);
-          resolve(json);
-        } catch (err) {
-          reject(new Error('Failed to parse JSON from URI.'));
-        }
-      });
-    }).on('error', reject);
-  });
-}
+const fs = require('fs');
+const path = require('path');
 
 function dummyTranslateJson(obj, toLang) {
   if (typeof obj === 'string') {
@@ -33,15 +17,23 @@ function dummyTranslateJson(obj, toLang) {
 
 async function run() {
   try {
-    const fromUri = core.getInput('from');
+    const folder = core.getInput('folder');
+    const from = core.getInput('from');
     const to = core.getInput('to');
 
-    if (!/^[a-z]{2}$/.test(to)) {
-      throw new Error('Invalid "to" language code. Use 2-letter ISO codes only.');
+    if (!/^[a-z]{2}$/.test(from) || !/^[a-z]{2}$/.test(to)) {
+      throw new Error('Invalid language code. Use 2-letter ISO codes only.');
     }
 
-    core.info(`Fetching source JSON from: ${fromUri}`);
-    const sourceJson = await fetchJson(fromUri);
+    const fromFilePath = path.join(folder, `${from}.json`);
+    core.info(`Reading source JSON: ${fromFilePath}`);
+
+    if (!fs.existsSync(fromFilePath)) {
+      throw new Error(`Source file not found: ${fromFilePath}`);
+    }
+
+    const fileContent = fs.readFileSync(fromFilePath, 'utf-8');
+    const sourceJson = JSON.parse(fileContent);
 
     const translatedJson = dummyTranslateJson(sourceJson, to);
     const output = JSON.stringify(translatedJson);
