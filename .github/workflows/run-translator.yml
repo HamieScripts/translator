@@ -36,5 +36,14 @@ jobs:
           from: en
           to: fr
 
-      - name: Print translated JSON output
-        run: echo "${{ steps.run_translator.outputs.translated }}"
+      - name: Write translated JSON to file
+        run: |
+          echo '${{ steps.run_translator.outputs.translated }}' > example-data/fr.json
+
+      - name: Commit and push translated file
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add example-data/fr.json
+          git commit -m "Add translated fr.json from GitHub Action"
+          git push
