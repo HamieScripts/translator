@@ -29,8 +29,12 @@ jobs:
           echo "source_json=$(base64 -w 0 example-data/en.json)" >> $GITHUB_OUTPUT
 
       - name: Run Translator
+        id: run_translator
         uses: HamieScripts/translator@main
         with:
           source-json: ${{ steps.read_source.outputs.source_json }}
           from: en
           to: fr
+
+      - name: Print translated JSON output
+        run: echo "${{ steps.run_translator.outputs.translated }}"
