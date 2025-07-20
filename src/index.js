@@ -1,5 +1,7 @@
 const core = require('@actions/core');
 
+
+
 function dummyTranslateJson(obj, toLang) {
   if (typeof obj === 'string') {
     return `[${toLang}] ${obj}`;
@@ -15,7 +17,9 @@ function dummyTranslateJson(obj, toLang) {
 
 async function run() {
   try {
-    const sourceJsonStr = core.getInput('source-json');
+
+    const sourceJsonBase64 = core.getInput('source-json');
+    const sourceJsonStr = Buffer.from(sourceJsonBase64, 'base64').toString('utf8');
     const to = core.getInput('to');
 
     if (!/^[a-z]{2}$/.test(to)) {
