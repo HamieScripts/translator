@@ -26,9 +26,7 @@ jobs:
       - name: Read source JSON into variable
         id: read_source
         run: |
-          echo "source_json<<EOF" >> $GITHUB_OUTPUT
-          cat example-data/en.json >> $GITHUB_OUTPUT
-          echo "EOF" >> $GITHUB_OUTPUT
+          echo "source_json=$(base64 -w 0 example-data/en.json)" >> $GITHUB_OUTPUT
 
       - name: Run Translator
         uses: HamieScripts/translator@main
