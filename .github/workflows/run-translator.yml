@@ -43,19 +43,31 @@ jobs:
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: us-east-1
 
-      - name: Run AWS Translate with inline JSON
+      - name: Run AWS Translate for each key
         id: translate
         run: |
-          JSON_INPUT='{
-            "Text": "Hello, how are you?",
-            "SourceLanguageCode": "en",
-            "TargetLanguageCode": "es"
-          }'
+          # Decode source JSON into a file
+          echo "${{ steps.read_source.outputs.source_json }}" | base64 -d > source.json
 
-          echo "Translating..."
-          aws translate translate-text \
-            --cli-input-json ${{ steps.read_source.outputs.source_json }} \
-            --output json | jq -r '.TranslatedText'
+          # Loop through each key-value pair and translate it
+          mkdir -p translated
+          jq -r 'to_entries[] | "\(.key)\u0000\(.value)"' source.json | while IFS=$'\0' read -r key value; do
+            # Build JSON input for AWS Translate
+            JSON_INPUT=$(jq -n --arg text "$value" --arg src "${{ github.event.inputs.from }}" --arg tgt "${{ github.event.inputs.to }}" '{
+              Text: $text,
+              SourceLanguageCode: $src,
+              TargetLanguageCode: $tgt
+            }')
+
+            # Run AWS Translate
+            translated=$(aws translate translate-text --cli-input-json "$JSON_INPUT" --output json | jq -r '.TranslatedText')
+
+            # Store result in a new JSON file
+            jq -n --arg k "$key" --arg v "$translated" '{($k): $v}' > "translated/$key.json"
+          done
+
+          # Merge all translated entries into one JSON file
+          jq -s 'add' translated/*.json > example-data/${{ github.event.inputs.to }}.json
 
       - name: Write translated JSON to file
         run: |
