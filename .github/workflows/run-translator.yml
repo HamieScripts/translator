@@ -6,7 +6,7 @@ on:
       folder:
         description: 'URI to folder containing translations'
         required: true
-        default: './example-data'
+        default: 'example-data'
       from:
         description: 'Source language code (2-letter ISO, e.g. en)'
         required: true
