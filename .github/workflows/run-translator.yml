@@ -74,6 +74,9 @@ jobs:
         run: |
           # Decode source JSON into a file
           echo "${{ steps.read_source.outputs.source_json }}" | base64 -d
+          aws translate translate-text \
+            --cli-input-json "${{ steps.read_source.outputs.source_json }}" | base64 -d \
+            --output json | jq -r '.TranslatedText'
 
 
       - name: Write translated JSON to file
