@@ -3,14 +3,14 @@ description: 'Translates JSON language files from one language to another.'
 author: 'Jamie Clark'
 
 inputs:
-  folder:
-    description: 'URI to the folder containing translation JSON files'
-    required: true
+  source-json:
+    description: 'Source JSON content as string'
+    required: false
   from:
-    description: 'Source language code (2-letter ISO, e.g. en)'
-    required: true
+    description: 'Source language code'
+    required: false
   to:
-    description: 'Target language code (2-letter ISO, e.g. fr)'
+    description: 'Target language code'
     required: true
 
 outputs:

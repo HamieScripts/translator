@@ -20,9 +20,19 @@ jobs:
   translate:
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Read source JSON into variable
+        id: read_source
+        run: |
+          echo "source_json<<EOF" >> $GITHUB_OUTPUT
+          cat example-data/en.json >> $GITHUB_OUTPUT
+          echo "EOF" >> $GITHUB_OUTPUT
+
       - name: Run Translator
         uses: HamieScripts/translator@main
         with:
-          folder: ${{ github.event.inputs.folder }}
-          from: ${{ github.event.inputs.from }}
-          to: ${{ github.event.inputs.to }}
+          source-json: ${{ steps.read_source.outputs.source_json }}
+          from: en
+          to: fr
