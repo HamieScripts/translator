@@ -1,0 +1,23 @@
+name: Run Translator Manually
+
+on:
+  workflow_dispatch:
+    inputs:
+      from:
+        description: 'URI to source en.json'
+        required: true
+        default: './example-data/en.json'
+      to:
+        description: 'Target language code'
+        required: true
+        default: 'fr'
+
+jobs:
+  translate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Run Translator
+        uses: HamieScripts/translator@main
+        with:
+          from: \${{ github.event.inputs.from }}
+          to: \${{ github.event.inputs.to }}
