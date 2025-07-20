@@ -1,0 +1,17 @@
+.app-header {
+  position: sticky;
+  top: 0;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  padding: 0 20px;
+  z-index: 1000;
+}
+
+.app-header .spacer {
+  flex-grow: 1;
+}
+
+.app-content {
+  padding-top: 50px; /* To prevent content from being hidden behind the sticky header */
+}

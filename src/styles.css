@@ -1,1 +1,13 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 /* You can add global styles to this file, and also import other style files */
+
+body {
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  min-height: 100vh; /* Ensure the background covers the entire viewport height */
+  margin: 0;
+}
