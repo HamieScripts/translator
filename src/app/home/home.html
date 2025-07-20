@@ -1,1 +1,4 @@
-<p>home works!</p>
+<div class="jumbotron glass-card p-6 rounded-lg shadow-lg bg-white/10 backdrop-blur-md border border-white/20 mx-auto mt-4 max-w-screen-lg text-center">
+  <h2 class="text-3xl font-bold mb-4">{{'SELECT_LANGUAGE' | translate}}</h2>
+  <p-select [options]="languages" [(ngModel)]="selectedLanguage" optionLabel="name" placeholder="{{'SELECT_LANGUAGE' | translate}}..."></p-select>
+</div>

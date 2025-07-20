@@ -1,7 +1,17 @@
-<header class="app-header">
-  <h1>My App</h1>
-  <p-button [icon]="isDarkMode ? 'pi pi-moon' : 'pi pi-sun'" aria-label="toggle-dark-mode" (click)="toggleDarkMode()" />
-</header>
+<div class="glass-card p-4 rounded-lg shadow-lg bg-white/10 backdrop-blur-md border border-white/20 mx-auto mt-4 max-w-screen-lg">
+  <header class="app-header flex ">
+    <div class="flex-1">
+      Some Title
+    </div>
+    <div class="flex flex-none gap-x-2">
+      <a href="https://angular.dev/" pButton size="small" variant="outlined" severity="secondary" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
+        <i class="pi pi-github" pButtonIcon></i>
+      </a>
+      <p-button severity="contrast" [icon]="!isDarkMode ? 'pi pi-moon' : 'pi pi-sun'" size="small" aria-label="toggle-dark-mode" (click)="toggleDarkMode()" />
+    </div>
+  </header>
+</div>
 <main class="app-content">
   <router-outlet />
 </main>
+
