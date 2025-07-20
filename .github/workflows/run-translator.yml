@@ -77,6 +77,7 @@ jobs:
           aws translate translate-text \
             --cli-input-json file://example-data/en.json
             --output json | jq -r '.TranslatedText'
+            --generate-cli-skeleton
 
 
       - name: Write translated JSON to file
