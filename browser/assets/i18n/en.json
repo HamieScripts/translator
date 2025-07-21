@@ -1,5 +1,12 @@
 {
+  "FLAG": "🇺🇸",
   "SELECT_LANGUAGE": "Select a language!",
+  "SET_UP_TITLE": "Set Up",
+  "SET_UP_TEXT": "This application is a demonstration of a GitHub Action that translates JSON files. You can find the source code on GitHub.",
   "GETTING_STARTED_TITLE": "Getting Started",
-  "GETTING_STARTED_TEXT": "Welcome to the translator app! Select a language from the dropdown above to get started.\n\nThis application allows you to quickly switch between different languages to see how content is translated. Explore the features and enjoy a seamless multilingual experience."
+  "GETTING_STARTED_TEXT": "Welcome to the translator app! Select a language from the dropdown above to get started.\n\nThis application allows you to quickly switch between different languages to see how content is translated. Explore the features and enjoy a seamless multilingual experience.",
+  "USAGE_TITLE": "Usage",
+  "USAGE_TEXT": "Here is an example of how to use the translator in your project.",
+  "AWS_CREDENTIALS_TITLE": "AWS Credentials",
+  "AWS_CREDENTIALS_TEXT": "To use the translator, you need to provide AWS credentials. You can do this by setting them as secrets in your GitHub repository. The workflow expects the following secrets:\n\n- `AWS_ACCESS_KEY_ID`\n- ``AWS_SECRET_ACCESS_KEY`\n\nAlternatively, you can configure AWS credentials directly in your workflow file if you prefer not to use secrets.\n\nFor more information on setting up AWS credentials, refer to the [AWS documentation](https://docs.aws.amazon.com/sdk-for-javascript/v2/developer-guide/setting-credentials-node.html)."
 }
