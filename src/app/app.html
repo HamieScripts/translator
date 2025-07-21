@@ -22,8 +22,13 @@
       <p-button severity="contrast" [icon]="!isDarkMode ? 'pi pi-moon' : 'pi pi-sun'" size="small" aria-label="toggle-dark-mode" (click)="toggleDarkMode()" />
     </div>
   </header>
+  <div class="language-selection mt-4">
+    <p>Current Language: {{ currentLanguage }}</p>
+    <p-button-group>
+      <p-button *ngFor="let lang of availableLanguages" (click)="setLanguage(lang)" [label]="lang.toUpperCase()" [outlined]="currentLanguage !== lang" severity="secondary"></p-button>
+    </p-button-group>
+  </div>
 </div>
 <main class="app-content">
   <router-outlet />
 </main>
-
