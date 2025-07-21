@@ -1,6 +1,7 @@
-name: Run Translator Manually
+name: Run Translator Manually or Reusably
 permissions:
   contents: write
+
 on:
   workflow_dispatch:
     inputs:
@@ -16,6 +17,25 @@ on:
         description: 'Comma-separated list of target language codes (e.g. fr,es,de)'
         required: true
         default: 'fr'
+  workflow_call:
+    inputs:
+      src:
+        description: 'URI to file of translations'
+        required: true
+        type: string
+      from:
+        description: 'Source language code (2-letter ISO, e.g. en)'
+        required: true
+        type: string
+      to:
+        description: 'Comma-separated list of target language codes (e.g. fr,es,de)'
+        required: true
+        type: string
+    secrets:
+      AWS_ACCESS_KEY_ID:
+        required: false
+      AWS_SECRET_ACCESS_KEY:
+        required: false
 
 jobs:
   translate:
@@ -33,19 +53,22 @@ jobs:
 
       - name: Translate and create files
         run: |
-          IFS=',' read -ra TARGET_LANGS <<< "${{ github.event.inputs.to }}"
+          SRC_PATH="${{ github.event.inputs.src || inputs.src }}"
+          FROM_LANG="${{ github.event.inputs.from || inputs.from }}"
+          TO_LANGS="${{ github.event.inputs.to || inputs.to }}"
+          IFS=',' read -ra TARGET_LANGS <<< "$TO_LANGS"
           for lang in "${TARGET_LANGS[@]}"; do
             echo "Translating to $lang"
-            output_file=$(dirname "${{ github.event.inputs.src }}")/$lang.json
+            output_file=$(dirname "$SRC_PATH")/$lang.json
             
             echo "{}" > $output_file
 
-            jq -r 'to_entries[] | .key' ${{ github.event.inputs.src }} | while read key; do
-              value=$(jq -r --arg key "$key" '.[$key]' ${{ github.event.inputs.src }})
+            jq -r 'to_entries[] | .key' "$SRC_PATH" | while read key; do
+              value=$(jq -r --arg key "$key" '.[$key]' "$SRC_PATH")
               
               translated_text=$(aws translate translate-text \
                 --text "$value" \
-                --source-language-code "${{ github.event.inputs.from }}" \
+                --source-language-code "$FROM_LANG" \
                 --target-language-code "$lang" \
                 --query 'TranslatedText' \
                 --output text)
@@ -57,13 +80,15 @@ jobs:
 
       - name: Commit and push translated files
         run: |
+          SRC_PATH="${{ github.event.inputs.src || inputs.src }}"
+          TO_LANGS="${{ github.event.inputs.to || inputs.to }}"
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           
-          IFS=',' read -ra TARGET_LANGS <<< "${{ github.event.inputs.to }}"
+          IFS=',' read -ra TARGET_LANGS <<< "$TO_LANGS"
           files_to_add=""
           for lang in "${TARGET_LANGS[@]}"; do
-            files_to_add="$files_to_add $(dirname "${{ github.event.inputs.src }}")/$lang.json"
+            files_to_add="$files_to_add $(dirname "$SRC_PATH")/$lang.json"
           done
 
           git add $files_to_add
