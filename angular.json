@@ -107,6 +107,36 @@
           }
         }
       }
+    },
+    "poly-flow-service": {
+      "projectType": "library",
+      "root": "projects/poly-flow-service",
+      "sourceRoot": "projects/poly-flow-service/src",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular/build:ng-packagr",
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/poly-flow-service/tsconfig.lib.prod.json"
+            },
+            "development": {
+              "tsConfig": "projects/poly-flow-service/tsconfig.lib.json"
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "test": {
+          "builder": "@angular/build:karma",
+          "options": {
+            "tsConfig": "projects/poly-flow-service/tsconfig.spec.json",
+            "polyfills": [
+              "zone.js",
+              "zone.js/testing"
+            ]
+          }
+        }
+      }
     }
   }
 }

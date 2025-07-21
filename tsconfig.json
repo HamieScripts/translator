@@ -11,6 +11,12 @@
     "skipLibCheck": true,
     "isolatedModules": true,
     "experimentalDecorators": true,
+    "paths": {
+      "poly-flow-service": [
+        "./dist/poly-flow-service"
+      ]
+      
+    },
     "importHelpers": true,
     "target": "ES2022",
     "module": "preserve"
@@ -29,6 +35,12 @@
     },
     {
       "path": "./tsconfig.spec.json"
+    },
+    {
+      "path": "./projects/poly-flow-service/tsconfig.lib.json"
+    },
+    {
+      "path": "./projects/poly-flow-service/tsconfig.spec.json"
     }
   ]
 }
