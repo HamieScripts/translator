@@ -9,6 +9,7 @@ import { HttpClient } from '@angular/common/http';
 import { routes } from './app.routes';
 import { providePrimeNG } from 'primeng/config';
 import Aura from '@primeng/themes/aura';
+import { provideMarkdown } from 'ngx-markdown';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, 'assets/i18n/', '.json');
@@ -35,6 +36,7 @@ export const appConfig: ApplicationConfig = {
         useFactory: HttpLoaderFactory,
         deps: [HttpClient]
       }
-    }).providers || []
+    }).providers || [],
+    provideMarkdown()
   ],
 };

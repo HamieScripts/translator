@@ -1,9 +1,29 @@
-<div class="jumbotron glass-card p-6 rounded-lg shadow-lg  backdrop-blur-lg border border-black/30 mx-auto mt-4 max-w-screen-lg text-center flex flex-col justify-center items-center min-h-[70vh]">
+<div 
+class="jumbotron 
+  glass-card 
+  p-4 
+  rounded-lg
+  shadow-lg
+  bg-white/10 
+  backdrop-blur-xs
+  border
+  border-white/30
+  mx-auto 
+  mt-4 
+  max-w-screen-lg 
+  text-center flex flex-col justify-center items-center min-h-[70vh]">
   <h2 class="text-3xl font-bold mb-4">{{'SELECT_LANGUAGE' | translate}}</h2>
   <p-select [options]="languages" [(ngModel)]="selectedLanguage" optionLabel="name" (onChange)="onLanguageChange()" class="w-1/2"></p-select>
 </div>
 
-<div class="getting-started-section glass-card p-6 rounded-lg shadow-lg bg-white/10 backdrop-blur-lg border border-black/30 mx-auto mt-4 max-w-screen-lg text-center min-h-[20vh]">
+<div class="getting-started-section glass-card p-6 rounded-lg shadow-lg bg-white/10 backdrop-blur-xs border border-white/30 mx-auto mt-4 max-w-screen-lg text-center min-h-[20vh]">
   <h2 class="text-3xl font-bold mb-4">{{'GETTING_STARTED_TITLE' | translate}}</h2>
   <p>{{'GETTING_STARTED_TEXT' | translate}}</p>
+</div>
+
+<div class="usage-section glass-card p-6 rounded-lg shadow-lg bg-white/10 backdrop-blur-xs border border-white/30 mx-auto mt-4 max-w-screen-lg">
+  <h2 class="text-3xl font-bold mb-4 text-center">Usage</h2>
+  <p class="text-center">Here is an example of how to use the translator in your project.</p>
+  <markdown [data]="data">
+  </markdown>
 </div>

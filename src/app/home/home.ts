@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { SelectModule } from 'primeng/select';
 import { FormsModule } from '@angular/forms';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
+import { MarkdownComponent } from 'ngx-markdown';
 
 interface Language {
   name: string;
@@ -11,11 +12,21 @@ interface Language {
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [SelectModule, FormsModule, TranslateModule],
+  imports: [SelectModule, FormsModule, TranslateModule, MarkdownComponent],
   templateUrl: './home.html',
   styleUrl: './home.css'
 })
 export class HomeComponent implements OnInit {
+  public data: string =
+`\`\`\`yaml
+- name: Run Translator
+  uses: HamieScripts/translator
+  with:
+    token: tesxt
+    files: |
+      example-data/en.json
+      example-data/fr.json
+\`\`\``;
   languages: Language[] = [];
   selectedLanguage: Language | undefined;
 
