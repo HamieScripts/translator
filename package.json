@@ -9,7 +9,9 @@
     "test": "ng test",
     "cli": "npm run start -w=cli"
   },
-  "workspaces": ["cli"],
+  "workspaces": [
+    "cli"
+  ],
   "private": true,
   "dependencies": {
     "@angular/common": "^20.0.0",
@@ -26,6 +28,7 @@
     "@tailwindcss/vite": "^4.1.11",
     "marked": "^15.0.12",
     "ngx-markdown": "^20.0.0",
+    "poly-flow-service": "^0.0.1",
     "postcss": "^8.5.6",
     "primeicons": "^7.0.0",
     "primeng": "^20.0.0",

@@ -51,6 +51,7 @@ const fs = __importStar(require("fs"));
 const path = __importStar(require("path"));
 const chalk_1 = __importDefault(require("chalk"));
 const packageJson = __importStar(require("../../package.json"));
+const child_process = __importStar(require("child_process"));
 const rl = readline.createInterface({
     input: process.stdin,
     output: process.stdout
@@ -108,6 +109,26 @@ function setupPolyFlow() {
             else {
                 console.log(chalk_1.default.gray(`Language file already exists: ${langFilePath}`));
             }
+        }
+        console.log(chalk_1.default.cyan('Installing poly-flow-service Angular library...'));
+        try {
+            const npmPath = process.env.npm_execpath || 'npm';
+            const npmArgs = [npmPath, 'install', 'poly-flow-service'];
+            yield new Promise((resolve, reject) => {
+                const installProcess = child_process.spawn(process.execPath, npmArgs, { stdio: 'inherit' });
+                installProcess.on('close', (code) => {
+                    if (code === 0) {
+                        resolve();
+                    }
+                    else {
+                        reject(new Error(`npm install poly-flow-service failed with code ${code}`));
+                    }
+                });
+            });
+            console.log(chalk_1.default.green('poly-flow-service installed successfully!'));
+        }
+        catch (error) {
+            console.error(chalk_1.default.red(`Failed to install poly-flow-service: ${error.message}`));
         }
         rl.close();
     });
