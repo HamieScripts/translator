@@ -1,9 +1,9 @@
 {
-  "name": "cli",
-  "version": "1.0.0",
+  "name": "poly-flow-cli",
+  "version": "0.0.3",
   "main": "dist/index.js",
   "bin": {
-    "polyflow-cli": "./dist/index.js"
+    "polyflow-cli": "dist/index.js"
   },
   "scripts": {
     "prepare": "tsc",
@@ -16,7 +16,11 @@
   "description": "",
   "dependencies": {
     "@types/node": "^24.0.15",
+    "chalk": "^4.1.2",
     "ts-node": "^10.9.2",
     "typescript": "^5.8.3"
+  },
+  "devDependencies": {
+    "@types/chalk": "^0.4.31"
   }
 }

@@ -1,3 +1,4 @@
+#!/usr/bin/env node
 "use strict";
 var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
     if (k2 === undefined) k2 = k;
@@ -41,10 +42,15 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 const readline = __importStar(require("readline"));
 const fs = __importStar(require("fs"));
 const path = __importStar(require("path"));
+const chalk_1 = __importDefault(require("chalk"));
+const packageJson = __importStar(require("../package.json"));
 const rl = readline.createInterface({
     input: process.stdin,
     output: process.stdout
@@ -52,10 +58,10 @@ const rl = readline.createInterface({
 const configFilePath = path.join(process.cwd(), 'polyflow.config.ts');
 function setupPolyFlow() {
     return __awaiter(this, void 0, void 0, function* () {
-        console.log('Welcome to PolyFlow CLI Setup!');
-        const translationRootDir = yield askQuestion('Enter the root directory for your translations (e.g., src/assets/i18n): ');
-        const defaultLanguage = (yield askQuestion('Enter the default language (defaults to en): ')) || 'en';
-        const targetLanguagesInput = yield askQuestion('Enter the languages you want to translate to (comma separated ISO codes, e.g., fr,es): ');
+        console.log(chalk_1.default.bold.cyan(`Welcome to PolyFlow CLI Setup! (v${packageJson.version})`));
+        const translationRootDir = yield askQuestion(chalk_1.default.yellow('Enter the root directory for your translations (e.g., src/assets/i18n): '));
+        const defaultLanguage = (yield askQuestion(chalk_1.default.yellow('Enter the default language (defaults to en): '))) || 'en';
+        const targetLanguagesInput = yield askQuestion(chalk_1.default.yellow('Enter the languages you want to translate to (comma separated ISO codes, e.g., fr,es): '));
         const targetLanguages = targetLanguagesInput.split(',').map(lang => lang.trim()).filter(lang => lang.length > 0);
         const configContent = `export const polyflowConfig = {
   translationRootDir: '${translationRootDir}',
@@ -64,7 +70,7 @@ function setupPolyFlow() {
 };
 `;
         fs.writeFileSync(configFilePath, configContent);
-        console.log(`Configuration saved to ${configFilePath}`);
+        console.log(chalk_1.default.green(`Configuration saved to ${configFilePath}`));
         rl.close();
     });
 }
