@@ -13,6 +13,8 @@
         "build": {
           "builder": "@angular/build:application",
           "options": {
+            "outputPath": "dist/translator",
+            "baseHref": "/translator/",
             "browser": "src/main.ts",
             "polyfills": [
               "zone.js"
