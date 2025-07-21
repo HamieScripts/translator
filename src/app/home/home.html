@@ -13,7 +13,23 @@ class="jumbotron
   max-w-screen-lg 
   text-center flex flex-col justify-center items-center min-h-[70vh]">
   <h2 class="text-3xl font-bold mb-4">{{'SELECT_LANGUAGE' | translate}}</h2>
-  <p-select [options]="languages" [(ngModel)]="selectedLanguage" optionLabel="name" (onChange)="onLanguageChange()" class="w-1/2"></p-select>
+  <p-select [options]="languages" [(ngModel)]="selectedLanguage" (onChange)="onLanguageChange()" class="w-1/2">
+    <ng-template let-option pTemplate="item">
+      <div class="flex align-items-center">
+        <div>{{ option.flag }} {{ option.name }}</div>
+      </div>
+    </ng-template>
+    <ng-template let-selectedOption pTemplate="selectedItem">
+      <div class="flex align-items-center">
+        <div>{{ selectedOption.flag }} {{ selectedOption.name }}</div>
+      </div>
+    </ng-template>
+  </p-select>
+</div>
+
+<div class="set-up glass-card p-6 rounded-lg shadow-lg bg-white/10 backdrop-blur-xs border border-white/30 mx-auto mt-4 max-w-screen-lg text-center min-h-[20vh]">
+    <h2 class="text-3xl font-bold mb-4">{{'SET_UP_TITLE' | translate}}</h2>
+  <p>{{'SET_UP_TEXT' | translate}}</p>
 </div>
 
 <div class="getting-started-section glass-card p-6 rounded-lg shadow-lg bg-white/10 backdrop-blur-xs border border-white/30 mx-auto mt-4 max-w-screen-lg text-center min-h-[20vh]">
@@ -22,8 +38,14 @@ class="jumbotron
 </div>
 
 <div class="usage-section glass-card p-6 rounded-lg shadow-lg bg-white/10 backdrop-blur-xs border border-white/30 mx-auto mt-4 max-w-screen-lg">
-  <h2 class="text-3xl font-bold mb-4 text-center">Usage</h2>
-  <p class="text-center">Here is an example of how to use the translator in your project.</p>
-  <markdown [data]="data">
+  <h2 class="text-3xl font-bold mb-4 text-center">{{'USAGE_TITLE' | translate}}</h2>
+  <p class="text-center">{{'USAGE_TEXT' | translate}}</p>
+  <markdown [data]="usageMarkdown">
+  </markdown>
+</div>
+
+<div class="aws-credentials-section glass-card p-6 rounded-lg shadow-lg bg-white/10 backdrop-blur-xs border border-white/30 mx-auto mt-4 max-w-screen-lg">
+  <h2 class="text-3xl font-bold mb-4 text-center">{{'AWS_CREDENTIALS_TITLE' | translate}}</h2>
+  <markdown [data]="('AWS_CREDENTIALS_TEXT' | translate)">
   </markdown>
 </div>

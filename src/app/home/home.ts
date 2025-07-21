@@ -7,6 +7,7 @@ import { MarkdownComponent } from 'ngx-markdown';
 interface Language {
   name: string;
   code: string;
+  flag: string;
 }
 
 @Component({
@@ -17,15 +18,14 @@ interface Language {
   styleUrl: './home.css'
 })
 export class HomeComponent implements OnInit {
-  public data: string =
+  public usageMarkdown: string =
 `\`\`\`yaml
 - name: Run Translator
-  uses: HamieScripts/translator
+  uses: HamieScripts/translator@main
   with:
-    token: tesxt
-    files: |
-      example-data/en.json
-      example-data/fr.json
+    src: example-data/en.json
+    from: en
+    to: fr,es,de
 \`\`\``;
   languages: Language[] = [];
   selectedLanguage: Language | undefined;
@@ -34,8 +34,8 @@ export class HomeComponent implements OnInit {
 
   ngOnInit() {
     this.languages = [
-      { name: 'English', code: 'en' },
-      { name: 'French', code: 'fr' }
+      { name: 'English', code: 'en', flag: '🇺🇸' },
+      { name: 'French', code: 'fr', flag: '🇫🇷' }
     ];
 
     // Set initial selected language based on current translation language

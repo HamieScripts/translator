@@ -1,5 +1,12 @@
 {
-  "SELECT_LANGUAGE": "[fr] Select a language!",
-  "GETTING_STARTED_TITLE": "[fr] Getting Started",
-  "GETTING_STARTED_TEXT": "[fr] Welcome to the translator app! Select a language from the dropdown above to get started.\n\n[fr] This application allows you to quickly switch between different languages to see how content is translated. Explore the features and enjoy a seamless multilingual experience."
+  "FLAG": "🇫🇷",
+  "SELECT_LANGUAGE": "Sélectionnez une langue !",
+  "SET_UP_TITLE": "Configuration",
+  "SET_UP_TEXT": "Cette application est une démonstration d'une action GitHub qui traduit les fichiers JSON. Vous pouvez trouver le code source sur GitHub.",
+  "GETTING_STARTED_TITLE": "Pour commencer",
+  "GETTING_STARTED_TEXT": "Bienvenue dans l'application de traduction ! Sélectionnez une langue dans le menu déroulant ci-dessus pour commencer.\n\nCette application vous permet de basculer rapidement entre différentes langues pour voir comment le contenu est traduit. Explorez les fonctionnalités et profitez d'une expérience multilingue transparente.",
+  "USAGE_TITLE": "Utilisation",
+  "USAGE_TEXT": "Voici un exemple d'utilisation du traducteur dans votre projet.",
+  "AWS_CREDENTIALS_TITLE": "Identifiants AWS",
+  "AWS_CREDENTIALS_TEXT": "Pour utiliser le traducteur, vous devez fournir des identifiants AWS. Vous pouvez le faire en les définissant comme secrets dans votre dépôt GitHub. Le workflow attend les secrets suivants :\n\n- `AWS_ACCESS_KEY_ID`\n- `AWS_SECRET_ACCESS_KEY`\n\nAlternativement, vous pouvez configurer les identifiants AWS directement dans votre fichier de workflow si vous préférez ne pas utiliser de secrets.\n\nPour plus d'informations sur la configuration des identifiants AWS, consultez la [documentation AWS](https://docs.aws.amazon.com/sdk-for-javascript/v2/developer-guide/setting-credentials-node.html)"
 }

@@ -6,8 +6,10 @@
     "start": "ng serve",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test"
+    "test": "ng test",
+    "cli": "npm run start -w=cli"
   },
+  "workspaces": ["cli"],
   "private": true,
   "dependencies": {
     "@angular/common": "^20.0.0",
